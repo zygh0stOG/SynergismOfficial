@@ -269,11 +269,11 @@ export const importData = async (e: Event, importFunc: (save: string | null) => 
   return importFunc(save)
 }
 
-export const importDataFromTextPrompt = async () => {
+export const importDataFromText = async () => {
   const input = await Prompt(i18next.t('importexport.loadFromTextPrompt'))
-  const now = new Date();
-  handleLastModified(now.getTime());
-  void importSynergism(input);
+  const now = new Date()
+  handleLastModified(now.getTime())
+  void importSynergism(input)
 }
 
 export const importSynergism = async (input: string | null, reset = false) => {
