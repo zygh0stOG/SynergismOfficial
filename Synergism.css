@@ -855,7 +855,18 @@ p#themesTitle {
     outline: none;
 }
 
+#importtext {
+    font-size: 0.75em;
+    padding: 0.05em;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    background-color: var(--button-color);
+    outline: none;
+}
+
 #savegame,
+#importtext,
 #deleteGame,
 #importFileButton,
 #exportButtons > label {
@@ -868,6 +879,10 @@ p#themesTitle {
 }
 
 #importFileButton:hover {
+    background-color: var(--hover-color);
+}
+
+#importtext:hover {
     background-color: var(--hover-color);
 }
 

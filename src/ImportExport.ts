@@ -269,6 +269,13 @@ export const importData = async (e: Event, importFunc: (save: string | null) => 
   return importFunc(save)
 }
 
+export const importDataFromTextPrompt = async () => {
+  const input = await Prompt(i18next.t('importexport.loadFromTextPrompt'))
+  const now = new Date();
+  handleLastModified(now.getTime());
+  void importSynergism(input);
+}
+
 export const importSynergism = async (input: string | null, reset = false) => {
   if (typeof input !== 'string') {
     return Alert(i18next.t('importexport.unableImport'))

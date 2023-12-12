@@ -3113,6 +3113,8 @@
     "exportHere": "Export the game here",
     "currently": "Currently: {{x}}",
     "loadGameBelow": "Load game below!",
+    "loadFromText": "Load from text",
+    "loadFromTextPrompt": "Paste save here",
     "loadFromFile": "Load from file",
     "saveManually": "Save the game manually",
     "deleteSave": "Delete savefile",
