@@ -252,8 +252,17 @@ export const instantCheat = async () => {
   player.worlds.add(1e+269)
   player.runelevels = [Math.max(1000, player.runelevels[0]), Math.max(1000, player.runelevels[1]), Math.max(1000, player.runelevels[2]), Math.max(1000, player.runelevels[3]), Math.max(1000, player.runelevels[4]), 99, 1]
   calculateRuneLevels()
+  //if (player.goldenQuarks > 1e+30) {
+  player.goldenQuarks = 1e+30
+  //}
   return Alert('Cheater!')
 }
+
+export const instantFix = async () => {
+  player.worlds.reset()
+  return Alert('Fixed it!')
+}
+
 
 export const importData = async (e: Event, importFunc: (save: string | null) => Promise<void> | Promise<undefined>) => {
   const element = e.target as HTMLInputElement
@@ -279,14 +288,14 @@ export const importData = async (e: Event, importFunc: (save: string | null) => 
   return importFunc(save)
 }
 
-export const importDataFromText = async (input: string | null, reset = false) => {
-  if (typeof input !== 'string') {
+export const importDataFromText = async (input?: string | null, reset = false) => {
+  if (typeof input !== 'string' || input === 'undefined') {
     input = await Prompt(i18next.t('importexport.loadFromTextPrompt'))
   }
   const now = new Date()
   handleLastModified(now.getTime())
   void importSynergism(input, reset)
-  return 
+  return
 }
 
 export const editData = async () => {
@@ -326,18 +335,18 @@ export const editData = async () => {
           (f.exporttest === 'NO!' && testing)
     ) {
       const saveString = btoa(JSON.stringify(f))
-  
+
       if (saveString === null) {
         return Alert(i18next.t('importexport.unableImport'))
       }
-  
+
       saveCheck.canSave = false
       const item = new Blob([saveString], { type: 'text/plain' })
       localStorage.setItem('Synergysave2', saveString)
       await localforage.setItem<Blob>('Synergysave2', item)
-  
+
       localStorage.setItem('saveScumIsCheating', Date.now().toString())
-  
+
       await reloadShit(false)
       saveCheck.canSave = true
       return

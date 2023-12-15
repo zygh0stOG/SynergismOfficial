@@ -924,10 +924,11 @@ p#themesTitle {
 #importFileButton,
 #editGameButton,
 #instantCheatButton,
+#instantFixButton,
 #exportButtons > label {
     width: 12em;
     min-width: 180px;
-    min-height: 20px;
+    min-height: 20x;
     margin: 2px auto;
     box-sizing: border-box;
     transition: background-color var(--transition-extra), border-color var(--transition-extra);
@@ -939,7 +940,8 @@ p#themesTitle {
 
 #importtext:hover,
 #editGameButton:hover,
-#instantCheatButton:hover {
+#instantCheatButton:hover,
+#instantFixButton:hover {
     background-color: var(--hover-color);
 }
 
