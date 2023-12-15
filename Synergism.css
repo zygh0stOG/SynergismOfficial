@@ -928,7 +928,7 @@ p#themesTitle {
 #exportButtons > label {
     width: 12em;
     min-width: 180px;
-    min-height: 20x;
+    min-height: 20px;
     margin: 2px auto;
     box-sizing: border-box;
     transition: background-color var(--transition-extra), border-color var(--transition-extra);
