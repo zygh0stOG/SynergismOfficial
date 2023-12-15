@@ -1,16 +1,15 @@
 import { player, saveSynergy, blankSave, reloadShit, format, saveCheck } from './Synergism'
-import { octeractGainPerSecond } from './Calculate'
+import { calculateRuneLevels, octeractGainPerSecond } from './Calculate'
 import { testing, version } from './Config'
-import { cleanString, getElementById, productContents, sumContents } from './Utility'
+import { btoa, cleanString, getElementById, productContents, sumContents } from './Utility'
 import LZString from 'lz-string'
 import { achievementaward } from './Achievements'
 import type { Player } from './types/Synergism'
 import { Synergism } from './Events'
-import { Alert, Confirm, Prompt } from './UpdateHTML'
+import { Alert, Confirm, Prompt, EditGame } from './UpdateHTML'
 import { quarkHandler } from './Quark'
 import { shopData } from './Shop'
 import { addTimers } from './Helper'
-import { btoa } from './Utility'
 import { DOMCacheGetOrSet } from './Cache/DOM'
 import localforage from 'localforage'
 import { Globals as G } from './Variables'
@@ -176,7 +175,7 @@ export const exportData = async (text: string, fileName: string) => {
   setTimeout(() => DOMCacheGetOrSet('exportinfo').textContent = '', 15_000)
 }
 
-export const exportSynergism = async (shouldSetLastSaveSoWeStopFuckingBotheringPeople = true) => {
+export const exportSynergism = async (shouldSetLastSaveSoWeStopFuckingBotheringPeople = true, exportFunc?: (arg0: string, arg1: string) => Promise<void>) => {
   player.offlinetick = Date.now()
 
   if (shouldSetLastSaveSoWeStopFuckingBotheringPeople) {
@@ -212,7 +211,11 @@ export const exportSynergism = async (shouldSetLastSaveSoWeStopFuckingBotheringP
     return Alert('How?')
   }
 
-  await exportData(saveString, saveFilename())
+  if (exportFunc === undefined) {
+    exportFunc = exportData
+  }
+
+  await exportFunc(saveString, saveFilename())
   setTimeout(() => DOMCacheGetOrSet('exportinfo').textContent = '', 15_000)
 }
 
@@ -237,12 +240,19 @@ export const resetGame = async () => {
   changeTab('buildings')
   changeSubTab('buildings', { page: 0 })
   changeSubTab('runes', { page: 0 }) // Set 'runes' subtab back to 'runes' tab
-  changeSubTab('cube', { page: 0 }) // Set 'cube tribues' subtab back to 'cubes' tab
+  changeSubTab('cube', { page: 0 }) // Set 'cube tributes' subtab back to 'cubes' tab
   changeSubTab('traits', { page: 0 }) // set 'corruption main'
   changeSubTab('singularity', { page: 0 }) // set 'singularity main'
   changeSubTab('settings', { page: 0 }) // set 'statistics main'
   //Import Game
   await importSynergism(btoa(JSON.stringify(hold)), true)
+}
+
+export const instantCheat = async () => {
+  player.worlds.add(1e+269)
+  player.runelevels = [Math.max(1000, player.runelevels[0]), Math.max(1000, player.runelevels[1]), Math.max(1000, player.runelevels[2]), Math.max(1000, player.runelevels[3]), Math.max(1000, player.runelevels[4]), 99, 1]
+  calculateRuneLevels()
+  return Alert('Cheater!')
 }
 
 export const importData = async (e: Event, importFunc: (save: string | null) => Promise<void> | Promise<undefined>) => {
@@ -269,11 +279,75 @@ export const importData = async (e: Event, importFunc: (save: string | null) => 
   return importFunc(save)
 }
 
-export const importDataFromText = async () => {
-  const input = await Prompt(i18next.t('importexport.loadFromTextPrompt'))
+export const importDataFromText = async (input: string | null, reset = false) => {
+  if (typeof input !== 'string') {
+    input = await Prompt(i18next.t('importexport.loadFromTextPrompt'))
+  }
   const now = new Date()
   handleLastModified(now.getTime())
-  void importSynergism(input)
+  void importSynergism(input, reset)
+  return 
+}
+
+export const editData = async () => {
+  const saved = await saveSynergy()
+
+  if (!saved) {
+    return
+  }
+
+  const save =
+        await localforage.getItem<Blob>('Synergysave2') ??
+        localStorage.getItem('Synergysave2')
+  const saveString = typeof save === 'string' ? save : await save?.text()
+
+  if (saveString === undefined) {
+    return Alert('How?')
+  }
+
+  const d = LZString.decompressFromBase64(saveString)
+  const q = d ? d : atob(saveString)
+
+  const shit = await EditGame(i18next.t('importexport.editGameData'), q)
+  //const now = new Date()
+  if (typeof shit === 'string') {
+    const l = LZString.compressToBase64(shit)
+    const s = l ? l : btoa(shit)
+    void importDataFromText(s)
+    /*
+    //handleLastModified(now.getTime())
+    //const f = LZString.compressToBase64(shit)
+    //const f = btoa(shit)
+    const f = shit ? JSON.parse(shit) as Player : JSON.parse(atob(shit)) as Player
+    //void importSynergism(f)
+    if (
+      (f.exporttest === 'YES!' || f.exporttest === true) ||
+          (f.exporttest === false && testing) ||
+          (f.exporttest === 'NO!' && testing)
+    ) {
+      const saveString = btoa(JSON.stringify(f))
+  
+      if (saveString === null) {
+        return Alert(i18next.t('importexport.unableImport'))
+      }
+  
+      saveCheck.canSave = false
+      const item = new Blob([saveString], { type: 'text/plain' })
+      localStorage.setItem('Synergysave2', saveString)
+      await localforage.setItem<Blob>('Synergysave2', item)
+  
+      localStorage.setItem('saveScumIsCheating', Date.now().toString())
+  
+      await reloadShit(false)
+      saveCheck.canSave = true
+      return
+    } else {
+      return Alert(i18next.t('importexport.loadTestInLive'))
+    }*/
+  } else {
+    return Alert('WTF mate?')
+  }
+  return
 }
 
 export const importSynergism = async (input: string | null, reset = false) => {

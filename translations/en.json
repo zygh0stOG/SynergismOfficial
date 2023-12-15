@@ -3118,6 +3118,10 @@
     "loadFromFile": "Load from file",
     "saveManually": "Save the game manually",
     "deleteSave": "Delete savefile",
+    "editGameBelow": "Edit game below!",
+    "editGame": "Edit game",
+    "instantCheatBelow":"Cheat below!",
+    "instantCheat": "Cheat!",
     "events": {
       "inactive": "<<var(--orchid-text-color);|Event Status:>> INACTIVE",
       "activeUntil": "ACTIVE UNTIL: {{x}}",
@@ -3337,6 +3341,7 @@
     "copiedSave": "Copied save to clipboard!",
     "copiedFile": "Savefile copied to file!",
     "exportFailed": "Export failed!",
+    "editGameData": "Edit game data",
     "unableCopySave": "Unable to write the save to clipboard.",
     "reloadDeletePrompt": "The next confirmation is to delete the save data\nIf you do not want to delete it, cancel it",
     "resetPrompt": "Answer the question to confirm you'd like to reset: what is {{a}}+{{b}}? (Hint: {{sum}})",

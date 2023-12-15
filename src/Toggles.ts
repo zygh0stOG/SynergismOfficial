@@ -980,7 +980,7 @@ export const confirmReply = (confirm = true) => {
   if (DOMCacheGetOrSet('alertWrapper').style.display === 'block') {
     (DOMCacheGetOrSet('ok_alert') as HTMLButtonElement).click()
   }
-  if (DOMCacheGetOrSet('confirmWrapper').style.display === 'block' || DOMCacheGetOrSet('promptWrapper').style.display === 'block') {
+  if (DOMCacheGetOrSet('confirmWrapper').style.display === 'block' || DOMCacheGetOrSet('promptWrapper').style.display === 'block' || DOMCacheGetOrSet('editGameWrapper').style.display === 'block') {
     if (confirm) {
       (DOMCacheGetOrSet('ok_confirm') as HTMLButtonElement).click()
     } else {

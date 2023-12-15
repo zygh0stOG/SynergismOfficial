@@ -12,7 +12,7 @@ import { antRepeat, sacrificeAnts, buyAntProducers, updateAntDescription, antUpg
 import { buyCubeUpgrades, cubeUpgradeDesc } from './Cubes'
 import { buyPlatonicUpgrades, createPlatonicDescription } from './Platonic'
 import { corruptionCleanseConfirm, corruptionDisplay } from './Corruptions'
-import { exportSynergism, updateSaveString, promocodes, promocodesPrompt, promocodesInfo, importSynergism, resetGame, reloadDeleteGame, importData, addCodeAvailableUses, importDataFromText } from './ImportExport'
+import { editData, exportSynergism, instantCheat, updateSaveString, promocodes, promocodesPrompt, promocodesInfo, importSynergism, resetGame, reloadDeleteGame, importData, addCodeAvailableUses, importDataFromText } from './ImportExport'
 import { resetHistoryTogglePerSecond } from './History'
 import { resetShopUpgrades, shopDescriptions, buyShopUpgrades, useConsumable, shopData, shopUpgradeTypes } from './Shop'
 import { Globals as G } from './Variables'
@@ -563,6 +563,8 @@ export const generateEventHandlers = () => {
   // Various functions
   DOMCacheGetOrSet('exportgame').addEventListener('click', () => exportSynergism())
   DOMCacheGetOrSet('importtext').addEventListener('click', () => importDataFromText())
+  DOMCacheGetOrSet('editGameButton').addEventListener('click', () => editData())
+  DOMCacheGetOrSet('instantCheatButton').addEventListener('click', () => instantCheat())
   DOMCacheGetOrSet('saveStringInput').addEventListener('blur', e => updateSaveString(e.target as HTMLInputElement))
   DOMCacheGetOrSet('savegame').addEventListener('click', () => saveSynergy(true))
   DOMCacheGetOrSet('deleteGame').addEventListener('click', () => resetGame())

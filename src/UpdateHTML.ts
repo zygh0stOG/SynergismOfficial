@@ -1010,6 +1010,7 @@ export const Confirm = (text: string): Promise<boolean> => {
 
   DOMCacheGetOrSet('alertWrapper').style.display = 'none'
   DOMCacheGetOrSet('promptWrapper').style.display = 'none'
+  DOMCacheGetOrSet('editGameWrapper').style.display = 'none'
 
   conf.style.display = 'block'
   confWrap.style.display = 'block'
@@ -1059,6 +1060,7 @@ export const Alert = (text: string): Promise<void> => {
 
   DOMCacheGetOrSet('confirmWrapper').style.display = 'none'
   DOMCacheGetOrSet('promptWrapper').style.display = 'none'
+  DOMCacheGetOrSet('editGameWrapper').style.display = 'none'
 
   conf.style.display = 'block'
   alertWrap.style.display = 'block'
@@ -1089,6 +1091,8 @@ export const Alert = (text: string): Promise<void> => {
 export const Prompt = (text: string, defaultValue?: string): Promise<string | null> => {
   const conf = DOMCacheGetOrSet('confirmationBox')
   const confWrap = DOMCacheGetOrSet('promptWrapper')
+  const editGameBox = DOMCacheGetOrSet('editGameBox')
+  const editGameWrap = DOMCacheGetOrSet('editGameWrapper')
   const overlay = DOMCacheGetOrSet('transparentBG')
   const popup = DOMCacheGetOrSet('prompt')
   const ok = DOMCacheGetOrSet('ok_prompt')
@@ -1096,6 +1100,7 @@ export const Prompt = (text: string, defaultValue?: string): Promise<string | nu
 
   DOMCacheGetOrSet('alertWrapper').style.display = 'none'
   DOMCacheGetOrSet('confirmWrapper').style.display = 'none'
+  DOMCacheGetOrSet('editGameWrapper').style.display = 'none'
 
   conf.style.display = 'block'
   confWrap.style.display = 'block'
@@ -1140,6 +1145,65 @@ export const Prompt = (text: string, defaultValue?: string): Promise<string | nu
   ok.addEventListener('click', listener, { once: true })
   cancel.addEventListener('click', listener, { once: true })
   popup.querySelector('input')!.addEventListener('keyup', kbListener)
+
+  return p.promise
+}
+
+export const EditGame = (text: string, defaultValue?: string): Promise<string | null> => {
+  const editGameBox = DOMCacheGetOrSet('editGameBox')
+  const editGameWrap = DOMCacheGetOrSet('editGameWrapper')
+  const overlay = DOMCacheGetOrSet('transparentBG')
+  const popup = DOMCacheGetOrSet('editGame')
+  const ok = DOMCacheGetOrSet('ok_editGame')
+  const cancel = DOMCacheGetOrSet('cancel_editGame')
+
+  DOMCacheGetOrSet('alertWrapper').style.display = 'none'
+  DOMCacheGetOrSet('confirmWrapper').style.display = 'none'
+  DOMCacheGetOrSet('editGameWrapper').style.display = 'none'
+
+  editGameBox.style.display = 'block'
+  editGameWrap.style.display = 'block'
+  overlay.style.display = 'block'
+  popup.querySelector('label')!.textContent = text
+  if (defaultValue) {
+    popup.querySelector('textarea')!.textContent = defaultValue
+  }
+  popup.querySelector('textarea')!.focus()
+
+  const p = createDeferredPromise<string | null>()
+
+  // kinda disgusting types but whatever
+  const listener = ({ target }: MouseEvent | { target: HTMLElement }) => {
+    const targetEl = target as HTMLButtonElement
+    const el = targetEl.parentNode!.querySelector('textarea')!
+
+    ok.removeEventListener('click', listener)
+    cancel.removeEventListener('click', listener)
+    popup.querySelector('textarea')!.removeEventListener('keyup', kbListener)
+
+    editGameBox.style.display = 'none'
+    editGameWrap.style.display = 'none'
+    overlay.style.display = 'none'
+
+    p.resolve(targetEl.id === ok.id ? el.textContent : null)
+
+    //el.value = el.textContent = el.placeholder = ''
+    //popup.querySelector('textarea')!.blur()
+  }
+
+  const kbListener = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      return listener({ target: ok })
+    } else if (e.key === 'Escape') {
+      return listener({ target: cancel })
+    }
+
+    return e.preventDefault()
+  }
+
+  ok.addEventListener('click', listener, { once: true })
+  cancel.addEventListener('click', listener, { once: true })
+  popup.querySelector('textarea')!.addEventListener('keyup', kbListener)
 
   return p.promise
 }
