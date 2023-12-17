@@ -254,8 +254,9 @@ export const instantCheat = async () => {
     player.runelevels = [Math.max(1000, player.runelevels[0]), Math.max(1000, player.runelevels[1]), Math.max(1000, player.runelevels[2]), Math.max(1000, player.runelevels[3]), Math.max(1000, player.runelevels[4]), 99, 1]
     calculateRuneLevels()
   }
-  //if (player.goldenQuarks > 1e+30) {
-  player.goldenQuarks = 1e+30
+  if (player.goldenQuarks > 1e+30) {
+    player.goldenQuarks = 1e+30
+  }
   player.wowOcteracts = 1e+100
   player.shopUpgrades.obtainiumPotion = 9999999
   player.shopUpgrades.offeringPotion = 9999999
