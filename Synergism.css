@@ -941,7 +941,9 @@ p#themesTitle {
 #importtext:hover,
 #editGameButton:hover,
 #instantCheatButton:hover,
-#instantFixButton:hover {
+#instantFixButton:hover,
+#cheatAddSingularity,
+#cheatSubSingularity {
     background-color: var(--hover-color);
 }
 
@@ -1011,6 +1013,25 @@ div.addCodeBox {
 #addCodeOne {
     flex-grow: 1;
     border: 2px solid green;
+}
+
+.cheatButton {
+    min-width: 35%;
+    margin-bottom: 3px;
+}
+
+div.cheatSingularityBox {
+    display: flex
+}
+
+#cheatAddSingularity {
+    flex-grow: 1;
+    border: 2px solid cyan;
+}
+
+#cheatSubSingularity {
+    flex-grow: 1;
+    border: 2px solid crimson;
 }
 
 p#promocodeinfo {

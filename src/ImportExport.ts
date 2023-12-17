@@ -249,11 +249,14 @@ export const resetGame = async () => {
 }
 
 export const instantCheat = async () => {
-  player.worlds.add(1e+10)
-  player.runelevels = [Math.max(1000, player.runelevels[0]), Math.max(1000, player.runelevels[1]), Math.max(1000, player.runelevels[2]), Math.max(1000, player.runelevels[3]), Math.max(1000, player.runelevels[4]), 99, 1]
-  calculateRuneLevels()
+  player.worlds.add(1e+20)
+  if (player.runelevels[0] < 1000) {
+    player.runelevels = [Math.max(1000, player.runelevels[0]), Math.max(1000, player.runelevels[1]), Math.max(1000, player.runelevels[2]), Math.max(1000, player.runelevels[3]), Math.max(1000, player.runelevels[4]), 99, 1]
+    calculateRuneLevels()
+  }
   //if (player.goldenQuarks > 1e+30) {
   player.goldenQuarks = 1e+30
+  player.wowOcteracts = 1e+100
   player.shopUpgrades.obtainiumPotion = 9999999
   player.shopUpgrades.offeringPotion = 9999999
   //}
@@ -265,6 +268,18 @@ export const instantFix = async () => {
   player.quarksThisSingularity = 0
   player.goldenQuarks = 1e+30
   return Alert('Fixed it!')
+}
+
+export const cheatAddSingularity = async () => {
+  player.singularityCount += 1
+  player.highestSingularityCount += 1
+  return Alert('Added')
+}
+
+export const cheatSubSingularity = async () => {
+  player.singularityCount -= 1
+  player.highestSingularityCount -= 1
+  return Alert('Subtracted')
 }
 
 
