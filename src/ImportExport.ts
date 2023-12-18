@@ -1,5 +1,5 @@
 import { player, saveSynergy, blankSave, reloadShit, format, saveCheck } from './Synergism'
-import { calculateRuneLevels, octeractGainPerSecond } from './Calculate'
+import { calculateMaxRunes, calculateRuneLevels, octeractGainPerSecond } from './Calculate'
 import { testing, version } from './Config'
 import { btoa, cleanString, getElementById, productContents, sumContents } from './Utility'
 import LZString from 'lz-string'
@@ -250,14 +250,14 @@ export const resetGame = async () => {
 
 export const instantCheat = async () => {
   player.worlds.add(1e+20)
-  if (player.runelevels[0] < 1000) {
-    player.runelevels = [Math.max(1000, player.runelevels[0]), Math.max(1000, player.runelevels[1]), Math.max(1000, player.runelevels[2]), Math.max(1000, player.runelevels[3]), Math.max(1000, player.runelevels[4]), 99, 1]
-    calculateRuneLevels()
-  }
-  if (player.goldenQuarks > 1e+30) {
-    player.goldenQuarks = 1e+30
-  }
-  player.wowOcteracts = 1e+100
+  //if (player.runelevels[0] < 1000) {
+  player.runelevels = [Math.max(calculateMaxRunes(1), player.runelevels[0]), Math.max(calculateMaxRunes(2), player.runelevels[1]), Math.max(calculateMaxRunes(3), player.runelevels[2]), Math.max(calculateMaxRunes(4), player.runelevels[3]), Math.max(calculateMaxRunes(5), player.runelevels[4]), 99, 1]
+  calculateRuneLevels()
+  //}
+  //if (player.goldenQuarks > 1e+30) {
+  player.goldenQuarks = 1e+30
+  //}
+  player.wowOcteracts = 1e+150
   player.shopUpgrades.obtainiumPotion = 9999999
   player.shopUpgrades.offeringPotion = 9999999
   //}
