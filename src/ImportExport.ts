@@ -258,6 +258,7 @@ export const instantCheat = async () => {
   player.goldenQuarks = 1e+30
   //}
   player.wowOcteracts = 1e+150
+  player.wowAbyssals += 1e+10
   player.shopUpgrades.obtainiumPotion = 9999999
   player.shopUpgrades.offeringPotion = 9999999
   //}
