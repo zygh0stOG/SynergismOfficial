@@ -264,6 +264,7 @@ export const instantCheat = async () => {
   } else {
     player.ambrosia = 1e+10
   }
+  player.blueberryTime **= 2
   player.shopUpgrades.obtainiumPotion = 9999999
   player.shopUpgrades.offeringPotion = 9999999
   //}
