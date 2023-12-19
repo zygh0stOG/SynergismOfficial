@@ -257,8 +257,13 @@ export const instantCheat = async () => {
   //if (player.goldenQuarks > 1e+30) {
   player.goldenQuarks = 1e+30
   //}
-  player.wowOcteracts = 1e+150
+  player.wowOcteracts += 1e+150
   player.wowAbyssals += 1e+10
+  if (player.ambrosia > 0) {
+    player.ambrosia **= 2
+  } else {
+    player.ambrosia = 1e+10
+  }
   player.shopUpgrades.obtainiumPotion = 9999999
   player.shopUpgrades.offeringPotion = 9999999
   //}
@@ -269,6 +274,8 @@ export const instantFix = async () => {
   player.worlds.reset()
   player.quarksThisSingularity = 0
   player.goldenQuarks = 1e+30
+  player.wowOcteracts = 1e+250
+  player.ambrosia = 1e+10
   return Alert('Fixed it!')
 }
 
