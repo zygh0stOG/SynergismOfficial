@@ -3123,6 +3123,8 @@
     "instantCheatBelow":"Cheat below!",
     "instantCheat": "Cheat!",
     "instantFix": "Fix it!",
+    "cheatAddSingularity": "Add Singularity",
+    "cheatSubSingularity": "Subtract Singularity",
     "events": {
       "inactive": "<<var(--orchid-text-color);|Event Status:>> INACTIVE",
       "activeUntil": "ACTIVE UNTIL: {{x}}",
