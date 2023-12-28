@@ -925,6 +925,9 @@ p#themesTitle {
 #editGameButton,
 #instantCheatButton,
 #instantFixButton,
+#cheatAddSingularity,
+#cheatSubSingularity,
+#cheatModSingularity,
 #exportButtons > label {
     width: 12em;
     min-width: 180px;
@@ -942,8 +945,9 @@ p#themesTitle {
 #editGameButton:hover,
 #instantCheatButton:hover,
 #instantFixButton:hover,
-#cheatAddSingularity,
-#cheatSubSingularity {
+#cheatAddSingularity:hover,
+#cheatSubSingularity:hover,
+#cheatModSingularity:hover {
     background-color: var(--hover-color);
 }
 
@@ -1021,17 +1025,20 @@ div.addCodeBox {
 }
 
 div.cheatSingularityBox {
-    display: flex
+    display: flex;
+    flex-direction: column;
 }
 
 #cheatAddSingularity {
-    flex-grow: 1;
     border: 2px solid cyan;
 }
 
 #cheatSubSingularity {
-    flex-grow: 1;
     border: 2px solid crimson;
+}
+
+#cheatModSingularity {
+    border: 2px solid rgb(192,0,255);
 }
 
 p#promocodeinfo {

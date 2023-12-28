@@ -292,6 +292,26 @@ export const cheatSubSingularity = async () => {
   return Alert('Subtracted')
 }
 
+export const cheatModSingularity = async () => {
+  let maxChangeable = 300
+  const change = Number(await Prompt(i18next.t('importexport.cheatModSingularity')))
+
+  if (isNaN(change) || !isFinite(change) || !Number.isInteger(change)) { // nan + Infinity checks
+    return Alert(i18next.t('general.validation.finite'))
+  }
+  if (change < 0 && (player.singularityCount === 0 || (player.singularityCount + change) < 0)) {
+    return Alert('You can\'t down on this bitch any further!')
+  }
+  if (player.singularityCount > 0) {
+    maxChangeable = Math.min(maxChangeable, maxChangeable - player.singularityCount)
+  }
+  if (maxChangeable === 0) {
+    return Alert('Nope, you\'re high enough, pal!')
+  }
+  player.singularityCount += change
+  player.highestSingularityCount += change
+  return Alert('Changed')
+}
 
 export const importData = async (e: Event, importFunc: (save: string | null) => Promise<void> | Promise<undefined>) => {
   const element = e.target as HTMLInputElement
