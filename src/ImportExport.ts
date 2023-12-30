@@ -313,6 +313,17 @@ export const cheatModSingularity = async () => {
   return Alert('Changed')
 }
 
+export const cheatMaxOcteractUpgrades = async () => {
+  for (const u of Object.keys(player.octeractUpgrades)) {
+    if (player.octeractUpgrades[u].maxLevel !== -1 && player.octeractUpgrades[u].level !== player.octeractUpgrades[u].maxLevel) {
+      player.octeractUpgrades[u].level = player.octeractUpgrades[u].maxLevel
+    } else if (player.octeractUpgrades[u].maxLevel === -1) {
+      player.octeractUpgrades[u].level += 1e+8
+    }
+  }
+  return Alert('Finite Octeract Upgrades Maxed and Added 1e+8 Levels to Infinite Upgrades')
+}
+
 export const importData = async (e: Event, importFunc: (save: string | null) => Promise<void> | Promise<undefined>) => {
   const element = e.target as HTMLInputElement
   const file = element.files![0]

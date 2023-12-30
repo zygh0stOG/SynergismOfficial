@@ -12,7 +12,7 @@ import { antRepeat, sacrificeAnts, buyAntProducers, updateAntDescription, antUpg
 import { buyCubeUpgrades, cubeUpgradeDesc } from './Cubes'
 import { buyPlatonicUpgrades, createPlatonicDescription } from './Platonic'
 import { corruptionCleanseConfirm, corruptionDisplay } from './Corruptions'
-import { editData, exportSynergism, instantCheat, instantFix, cheatModSingularity, updateSaveString, promocodes, promocodesPrompt, promocodesInfo, importSynergism, resetGame, reloadDeleteGame, importData, addCodeAvailableUses, importDataFromText } from './ImportExport'
+import { editData, exportSynergism, instantCheat, instantFix, cheatMaxOcteractUpgrades, cheatModSingularity, updateSaveString, promocodes, promocodesPrompt, promocodesInfo, importSynergism, resetGame, reloadDeleteGame, importData, addCodeAvailableUses, importDataFromText } from './ImportExport'
 import { resetHistoryTogglePerSecond } from './History'
 import { resetShopUpgrades, shopDescriptions, buyShopUpgrades, useConsumable, shopData, shopUpgradeTypes } from './Shop'
 import { Globals as G } from './Variables'
@@ -569,6 +569,7 @@ export const generateEventHandlers = () => {
   //DOMCacheGetOrSet('cheatAddSingularity').addEventListener('click', () => cheatAddSingularity())
   //DOMCacheGetOrSet('cheatSubSingularity').addEventListener('click', () => cheatSubSingularity())
   DOMCacheGetOrSet('cheatModSingularity').addEventListener('click', () => cheatModSingularity())
+  DOMCacheGetOrSet('cheatMaxOcteractUpgrades').addEventListener('click', () => cheatMaxOcteractUpgrades())
   DOMCacheGetOrSet('saveStringInput').addEventListener('blur', e => updateSaveString(e.target as HTMLInputElement))
   DOMCacheGetOrSet('savegame').addEventListener('click', () => saveSynergy(true))
   DOMCacheGetOrSet('deleteGame').addEventListener('click', () => resetGame())

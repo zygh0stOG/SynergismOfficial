@@ -928,6 +928,7 @@ p#themesTitle {
 #cheatAddSingularity,
 #cheatSubSingularity,
 #cheatModSingularity,
+#cheatMaxOcteractUpgrades,
 #exportButtons > label {
     width: 12em;
     min-width: 180px;
@@ -947,7 +948,8 @@ p#themesTitle {
 #instantFixButton:hover,
 #cheatAddSingularity:hover,
 #cheatSubSingularity:hover,
-#cheatModSingularity:hover {
+#cheatModSingularity:hover,
+#cheatMaxOcteractUpgrades:hover {
     background-color: var(--hover-color);
 }
 
@@ -1039,6 +1041,10 @@ div.cheatSingularityBox {
 
 #cheatModSingularity {
     border: 2px solid rgb(192,0,255);
+}
+
+#cheatMaxOcteractUpgrades {
+    border: 2px solid rgb(255,128,64);
 }
 
 p#promocodeinfo {
